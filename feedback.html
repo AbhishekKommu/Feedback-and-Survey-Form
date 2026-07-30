@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback & Survey Form</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(
+        -45deg,
+        #ff6b6b,
+        #ab8944,
+        #48dbfb,
+        #5f27cd
+    );
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+    padding:20px;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.form-container{
+    width:100%;
+    max-width:600px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:30px;
+    color:white;
+    box-shadow:0 8px 32px rgba(0,0,0,0.25);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:600;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+}
+
+textarea{
+    resize:none;
+    height:100px;
+}
+
+.rating{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    font-size:30px;
+    margin:10px 0;
+}
+
+.star{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.star:hover{
+    transform:scale(1.2);
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#00c853;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#009624;
+}
+
+.success{
+    display:none;
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+    color:#fff;
+}
+</style>
+</head>
+<body>
+
+<div class="form-container">
+
+    <h1>📋 Feedback & Survey Form</h1>
+
+    <div class="input-group">
+        <label>Your Name</label>
+        <input type="text" id="name" placeholder="Enter your name">
+    </div>
+
+    <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email">
+    </div>
+
+    <div class="input-group">
+        <label>How satisfied are you?</label>
+
+        <div class="rating">
+            <span class="star" onclick="rate(1)">⭐</span>
+            <span class="star" onclick="rate(2)">⭐</span>
+            <span class="star" onclick="rate(3)">⭐</span>
+            <span class="star" onclick="rate(4)">⭐</span>
+            <span class="star" onclick="rate(5)">⭐</span>
+        </div>
+
+        <p style="text-align:center">
+            Rating: <span id="ratingValue">0</span>/5
+        </p>
+    </div>
+
+    <div class="input-group">
+        <label>Favorite Feature</label>
+        <select id="feature">
+            <option>Design</option>
+            <option>Performance</option>
+            <option>Ease of Use</option>
+            <option>Functionality</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>Additional Feedback</label>
+        <textarea id="feedback"
+        placeholder="Write your feedback here..."></textarea>
+    </div>
+
+    <button onclick="submitForm()">
+        Submit Feedback
+    </button>
+
+    <div class="success" id="successMsg">
+        🎉 Thank you for your feedback!
+    </div>
+
+</div>
+
+<script>
+
+let selectedRating = 0;
+
+function rate(value){
+    selectedRating = value;
+    document.getElementById("ratingValue").innerText = value;
+}
+
+function submitForm(){
+
+    let name =
+    document.getElementById("name").value;
+
+    let email =
+    document.getElementById("email").value;
+
+    let feedback =
+    document.getElementById("feedback").value;
+
+    if(name === "" || email === "" || feedback === ""){
+        alert("Please fill all fields.");
+        return;
+    }
+
+    document.getElementById("successMsg")
+    .style.display = "block";
+
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("feedback").value = "";
+    document.getElementById("ratingValue").innerText = "0";
+
+    selectedRating = 0;
+}
+</script>
+
+</body>
+</html>
